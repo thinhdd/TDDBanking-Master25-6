@@ -38,4 +38,8 @@ public class BankAccount {
         bankAccountDAO.save(accountDTO);
         //To change body of created methods use File | Settings | File Templates.
     }
+
+    public static void getAllTransaction(String accountNumber) {
+        //To change body of created methods use File | Settings | File Templates.
+    }
 }
