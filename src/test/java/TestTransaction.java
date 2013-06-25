@@ -70,4 +70,20 @@ public class TestTransaction {
         assertEquals(accountNumber, list.get(2).getAccountNumber());
         assertEquals(50.0, list.get(2).getBalance());
     }
+    @Test
+    public void testSaveWithDraw()
+    {
+        ArgumentCaptor<TransactionDTO> act = ArgumentCaptor.forClass(TransactionDTO.class);
+        BankAccountDTO accountDTO = BankAccount.openAccount(accountNumber);
+        when(mockDao.getAccount(accountNumber)).thenReturn(accountDTO);
+        when(calendar.getTimeInMillis()).thenReturn(1000l).thenReturn(2000l);
+        BankAccount.doDeposit(accountNumber, 100.0, "Them 100k");
+        BankAccount.doWithDraw(accountNumber, 50.0, "Rut 50k");
+        verify(mockTDao,times(2)).save(act.capture());
+        List<TransactionDTO> list = act.getAllValues();
+        assertEquals(accountNumber, list.get(1).getAccountNumber());
+        assertEquals(50.0, list.get(1).getAmount());
+        assertEquals("Rut 50k", list.get(1).getDes());
+        assertEquals(2000l, list.get(1).getTimeStamp());
+    }
 }
