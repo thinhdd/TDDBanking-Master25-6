@@ -45,4 +45,8 @@ public class BankAccount {
         return Transaction.getAllTransaction(accountNumber);
         //To change body of created methods use File | Settings | File Templates.
     }
+
+    public static List<TransactionDTO> getAllTransaction(String accountNumber, long start, long end) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
