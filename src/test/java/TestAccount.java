@@ -36,6 +36,7 @@ public class TestAccount {
         BankAccountDTO account = BankAccount.openAccount(accountNumber);
         when(mockDao.getAccount(accountNumber)).thenReturn(account);
         BankAccountDTO accountRe = BankAccount.getAccount(accountNumber);
+        verify(mockDao).getAccount(accountNumber);
         assertEquals(account, accountRe);
     }
 }
