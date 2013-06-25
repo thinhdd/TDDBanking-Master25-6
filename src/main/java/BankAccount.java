@@ -15,7 +15,7 @@ public class BankAccount {
     public static BankAccountDTO openAccount(String accountNumber) {
         BankAccountDTO account = new BankAccountDTO(accountNumber);
         bankAccountDAO.save(account);
-        return null;
+        return account;
         //To change body of created methods use File | Settings | File Templates.
     }
 
@@ -24,6 +24,9 @@ public class BankAccount {
     }
 
     public static void doDeposit(String accountNumber, double amount, String des) {
+        BankAccountDTO accountDTO = bankAccountDAO.getAccount(accountNumber);
+        accountDTO.setBalance(amount);
+        bankAccountDAO.save(accountDTO);
         //To change body of created methods use File | Settings | File Templates.
     }
 }
