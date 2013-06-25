@@ -26,12 +26,16 @@ public class BankAccount {
     public static void doDeposit(String accountNumber, double amount, String des) {
         BankAccountDTO accountDTO = bankAccountDAO.getAccount(accountNumber);
         accountDTO.setBalance(amount);
-        Transaction.openTransaction(accountNumber, amount, des);
+        Transaction.openTransaction(accountNumber, amount, des, true);
         bankAccountDAO.save(accountDTO);
         //To change body of created methods use File | Settings | File Templates.
     }
 
     public static void doWithDraw(String accountNumber, double amount, String des) {
+        BankAccountDTO accountDTO = bankAccountDAO.getAccount(accountNumber);
+        accountDTO.setBalance(-amount);
+        Transaction.openTransaction(accountNumber, amount, des, false);
+        bankAccountDAO.save(accountDTO);
         //To change body of created methods use File | Settings | File Templates.
     }
 }
