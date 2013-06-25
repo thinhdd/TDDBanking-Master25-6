@@ -22,7 +22,9 @@ public class TestAccount {
     public void setUp()
     {
         reset(mockDao);
+        reset(calendar);
         BankAccount.setBankAccountDAO(mockDao);
+        BankAccountDTO.setTimeStamp(calendar);
     }
     @Test
     public void testOpenAccount()

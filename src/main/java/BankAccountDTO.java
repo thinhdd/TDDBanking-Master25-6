@@ -11,7 +11,7 @@ public class BankAccountDTO {
     String accountNumber;
     double balance;
     long timeStamp;
-    Calendar calendar = Calendar.getInstance();
+    static Calendar calendar = Calendar.getInstance();
     public BankAccountDTO(String accountNumber) {
         this.accountNumber=accountNumber;
         this.timeStamp= calendar.getTimeInMillis();
@@ -32,5 +32,9 @@ public class BankAccountDTO {
 
     public long getTimeStamp() {
         return this.timeStamp;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public static void setTimeStamp(Calendar calendars) {
+        calendar=calendars;
     }
 }
