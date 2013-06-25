@@ -1,3 +1,5 @@
+import java.util.Calendar;
+
 /**
  * Created with IntelliJ IDEA.
  * User: thinhdd
@@ -8,8 +10,11 @@
 public class BankAccountDTO {
     String accountNumber;
     double balance;
+    long timeStamp;
+    Calendar calendar = Calendar.getInstance();
     public BankAccountDTO(String accountNumber) {
         this.accountNumber=accountNumber;
+        this.timeStamp= calendar.getTimeInMillis();
         //To change body of created methods use File | Settings | File Templates.
     }
 
@@ -23,5 +28,9 @@ public class BankAccountDTO {
 
     public void setBalance(double amount) {
         this.balance = this.balance + amount;
+    }
+
+    public long getTimeStamp() {
+        return this.timeStamp;  //To change body of created methods use File | Settings | File Templates.
     }
 }

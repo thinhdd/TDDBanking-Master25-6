@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.Calendar;
+
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -15,6 +17,7 @@ import static org.mockito.Mockito.*;
 public class TestAccount {
     public BankAccountDAO mockDao = mock(BankAccountDAO.class);
     public String accountNumber = "123456";
+    public Calendar calendar = mock(Calendar.class);
     @Before
     public void setUp()
     {
@@ -38,5 +41,16 @@ public class TestAccount {
         BankAccountDTO accountRe = BankAccount.getAccount(accountNumber);
         verify(mockDao).getAccount(accountNumber);
         assertEquals(account, accountRe);
+    }
+    @Test
+    public void testCheckTimeStamp()
+    {
+        ArgumentCaptor<BankAccountDTO> ac = ArgumentCaptor.forClass(BankAccountDTO.class);
+        when(calendar.getTimeInMillis()).thenReturn(1000l);
+        BankAccount.openAccount(accountNumber);
+        verify(mockDao).save(ac.capture());
+        assertEquals(ac.getValue().getAccountNumber(), accountNumber);
+        assertEquals(ac.getValue().getBalance(), 0.0);
+        assertEquals(ac.getValue().getTimeStamp(), 1000l);;
     }
 }
