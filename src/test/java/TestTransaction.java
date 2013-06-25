@@ -55,5 +55,6 @@ public class TestTransaction {
         assertEquals(accountNumber, act.getValue().getAccountNumber());
         assertEquals(100.0, act.getValue().getAmount());
         assertEquals("Them 100k", act.getValue().getDes());
+        assertEquals(1000l, act.getValue().getTimeStamp());
     }
 }
