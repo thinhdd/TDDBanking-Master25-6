@@ -28,7 +28,7 @@ public class TestAccount {
     {
         ArgumentCaptor<BankAccountDTO> ac = ArgumentCaptor.forClass(BankAccountDTO.class);
         BankAccount.openAccount(accountNumber);
-        verify(mockDao).save(ac.getValue());
+        verify(mockDao).save(ac.capture());
         assertEquals(accountNumber, ac.getValue().getAccountNumber());
         assertEquals(0.0, ac.getValue().getBalance());
     }
